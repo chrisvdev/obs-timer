@@ -1,0 +1,54 @@
+---
+import Main from "../layouts/main.astro";
+---
+
+<Main>
+  <section
+    class="h-screen w-screen flex flex-col justify-center items-center bg-zinc-950"
+  >
+    <h1
+      id="timer"
+      class="text-9xl font-medium transition-all text-zinc-100 drop-shadow-custom"
+    >
+      10:00
+    </h1>
+    <h2 id="text" class="text-4xl text-zinc-100 drop-shadow-custom">
+      ¡En un momento arrancamos!
+    </h2>
+  </section>
+</Main>
+
+<script>
+  let count = 3; // 599;
+  const timer = document.getElementById("timer");
+  const text = document.getElementById("text");
+  const refresh = setInterval(() => {
+    timer.innerText =
+      count > 0
+        ? count >= 60
+          ? `${Math.floor(count / 60)}:${
+              count % 60 < 10 ? `0${count % 60}` : count % 60
+            }`
+          : count
+        : "Arrancamos";
+    text.innerText = [
+      "Ojala los Aliens 🛸 no molesten hoy 🤦‍♂️",
+      "...",
+      "Mientras disfruta de la música 🎶",
+      "Trae algo para picar 🥐...",
+      "Pone el agua para el mate 🧉",
+      "¡En un momento arrancamos!",
+    ][Math.floor((count % 60) / 10)];
+    count--;
+    if (count < 0) {
+      clearInterval(refresh);
+      text.innerText = [
+        "Iuju!!! 🥳",
+        "¡Vamos! 💪",
+        "¡Quack! 🦆",
+        "¡Oh no! 👽 ¡Un alien! 🛸",
+        "[         600.346357] Kernel panic - not syncing: Fatal exception in interrupt",
+      ][Math.floor((Math.random() * 100) % 5)];
+    }
+  }, 1000);
+</script>
